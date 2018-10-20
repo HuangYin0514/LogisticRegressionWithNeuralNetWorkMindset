@@ -2,6 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 from lr_utils import load_dataset
 
+'''
+Define the model structure (such as number of input features)
+Initialize the model's parameters
+Loop:
+    Calculate current loss (forward propagation)
+    Calculate current gradient (backward propagation)
+    Update parameters (gradient descent)
+You often build 1-3 separately and integrate them into one function we call model().
+'''
+
 # Loading the data (cat/non-cat)
 train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = load_dataset()
 
@@ -48,5 +58,32 @@ from Sigmoid import sigmoid
 
 print("sigmoid(0) = " + str(sigmoid(0)))
 print("sigmoid(9.2) = " + str(sigmoid(9.2)))
+print()
 
 # Initializing parameters
+from Initialize_with_zeros import initialize_with_zeros
+
+dim = 2
+w, b = initialize_with_zeros(2)
+print("w = " + str(w))
+print("b = " + str(b))
+print()
+
+# propagate
+from Propagate import propagate
+
+w, b, X, Y = np.array([[1], [2]]), 2, np.array([[1, 2], [3, 4]]), np.array([[1, 0]])
+grads, cost = propagate(w, b, X, Y)
+print("dw = " + str(grads["dw"]))
+print("db = " + str(grads["db"]))
+print("cost = " + str(cost))
+print()
+
+# optimize
+from Optimize import optimize
+
+params, grads, cost = optimize(w, b, X, Y, num_iterations=100, learning_rate=0.009, print_cost=False)
+print("w = " + str(params["w"]))
+print("b = " + str(params["b"]))
+print("dw = " + str(grads["dw"]))
+print("db = " + str(grads["db"]))
