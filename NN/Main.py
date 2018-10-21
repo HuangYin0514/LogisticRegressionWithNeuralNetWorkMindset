@@ -89,4 +89,7 @@ print("dw = " + str(grads["dw"]))
 print("db = " + str(grads["db"]))
 print("cost = " + str(costs))
 
-#pridict
+# pridict
+from Predict import predict
+
+print("prediction = " + str(predict(w, b, X)))
