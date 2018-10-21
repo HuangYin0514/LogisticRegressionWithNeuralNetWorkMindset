@@ -82,8 +82,11 @@ print()
 # optimize
 from Optimize import optimize
 
-params, grads, cost = optimize(w, b, X, Y, num_iterations=100, learning_rate=0.009, print_cost=False)
+params, grads, costs = optimize(w, b, X, Y, num_iterations=101, learning_rate=0.009, print_cost=True)
 print("w = " + str(params["w"]))
 print("b = " + str(params["b"]))
 print("dw = " + str(grads["dw"]))
 print("db = " + str(grads["db"]))
+print("cost = " + str(costs))
+
+#pridict

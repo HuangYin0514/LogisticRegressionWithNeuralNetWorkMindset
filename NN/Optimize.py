@@ -24,16 +24,21 @@ def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
            1) Calculate the cost and the gradient for the current parameters. Use propagate().
            2) Update the parameters using gradient descent rule for w and b.
        """
-    nw = w
-    nb = b
-    cost = np.zeros(shape=(num_iterations,1))
+
+    costs = []
 
     for i in range(num_iterations):
         from Propagate import propagate
-        grads, cost = propagate(nw, nb, X, Y)
-        nw = nw - learning_rate * grads["dw"]
-        nb = nw - learning_rate * grads["db"]
-        # cost[i] = cost
-    params = {"w": nw, "b": nb}
-    grads = {"dw": nw, "b": nb}
-    return params, grads, cost
+        grads, cost = propagate(w, b, X, Y)
+        dw = grads["dw"]
+        db = grads["db"]
+        w = w - learning_rate * dw
+        b = b - learning_rate * db
+        if i % 100 == 0:
+            costs.append(cost)
+        if print_cost and i % 100 == 0:
+            print("Cost after iteration %i: %f" % (i, cost))
+
+    params = {"w": w, "b": b}
+    grads = {"dw": dw, "db": db}
+    return params, grads, costs
