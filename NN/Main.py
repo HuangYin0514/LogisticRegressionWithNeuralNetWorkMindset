@@ -1,6 +1,8 @@
 # coding=utf-8
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy
+from scipy import ndimage
 from lr_utils import load_dataset
 
 '''
@@ -99,7 +101,7 @@ print()
 # model
 from Model import model
 
-d = model(X_train=train_set_x, Y_train=train_set_y, X_test=test_set_x, Y_test=test_set_y, num_iteration=2,
+d = model(X_train=train_set_x, Y_train=train_set_y, X_test=test_set_x, Y_test=test_set_y, num_iteration=2000,
           learn_rate=0.005, print_cost=True)
 print()
 
@@ -130,7 +132,7 @@ plt.figure()
 for i in learing_rate:
     print("learing rate is " + str(i))
     models[str(i)] = model(X_train=train_set_x, Y_train=train_set_y, X_test=test_set_x, Y_test=test_set_y,
-                           num_iteration=1500,
+                           num_iteration=15,
                            learn_rate=i, print_cost=False)
     print("\n" + "--------------------------------------------------" + "\n")
 
@@ -141,4 +143,17 @@ plt.ylabel("cost")
 legend = plt.legend(loc="upper center", shadow=True)
 frame = legend.get_frame()
 frame.set_facecolor("0.90")
-plt.show()
+# plt.show()
+
+my_image = "timg.jpg"
+# we Preprocess the image to fit your algorithm
+fname = "images/" + my_image
+image = np.array(plt.imread(fname))
+my_image = scipy.resize(image, (num_px, num_px,3)).reshape((1,num_px*num_px*3)).T
+my_predicted_image = predict(d["w"],d["b"],my_image)
+plt.imshow(image)
+# plt.show()
+print("y = " + str(np.squeeze(my_predicted_image)) + ", your algorithm predicts a \"" + classes[int(np.squeeze(my_predicted_image)),].decode("utf-8") +  "\" picture.")
+
+print()
+
