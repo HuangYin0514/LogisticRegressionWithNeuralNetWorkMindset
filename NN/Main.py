@@ -1,3 +1,4 @@
+# coding=utf-8
 import numpy as np
 import matplotlib.pyplot as plt
 from lr_utils import load_dataset
@@ -22,11 +23,11 @@ plt.imshow(train_set_x_orig[index])
 print("y = " + str(train_set_y[:, index]) + ", it is a " +
       classes[np.squeeze(train_set_y[:, index])].decode("utf-8") + " picture")
 print()
-
 ### START CODE HERE ### (≈ 3 lines of code)
 m_train = train_set_y.shape[1]
 m_test = test_set_y.shape[1]
 num_px = train_set_x_orig.shape[1]
+
 ### END CODE HERE ###
 print("Number of training examples: m_train = " + str(m_train))
 print("Number of testing examples: m_test = " + str(m_test))
@@ -98,5 +99,23 @@ print()
 # model
 from Model import model
 
-model(X_train=train_set_x, Y_train=train_set_y, X_test=test_set_x, Y_test=test_set_y,
-      num_iteration=2000, learn_rate=0.005, print_cost=True)
+d = model(X_train=train_set_x, Y_train=train_set_y, X_test=test_set_x, Y_test=test_set_y, num_iteration=2000,
+          learn_rate=0.005, print_cost=True)
+print()
+
+# Example of a picture that was wrongly classified.
+index = 5
+plt.imshow(test_set_x[:, index].reshape((num_px, num_px, 3)))
+# plt.show()
+print("y = " + str(test_set_y[:, index]) +
+      ", you pridict that it is a \"" + classes[int(d["Y_prediction_test"][0, index])].decode("utf-8") + "\" picture")
+
+# plot the cost function and the gradient
+# Plot learning curve (with costs)
+costs = np.squeeze(d["costs"])
+plt.figure()
+plt.plot(costs)
+plt.ylabel("cost")
+plt.xlabel("iterations (per handreds)")
+plt.title("Learning rate =" + str(d["learning_rate"]))
+plt.show()

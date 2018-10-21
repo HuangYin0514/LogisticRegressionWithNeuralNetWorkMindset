@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def model(X_train, Y_train, X_test, Y_test, num_iteration=2000, learn_rate=0.5, print_cost=False):
     """
        Builds the logistic regression model by calling the function you've implemented previously
@@ -42,12 +41,12 @@ def model(X_train, Y_train, X_test, Y_test, num_iteration=2000, learn_rate=0.5, 
     print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_pridiction_test - Y_test)) * 100))
 
     d = {
-        "cost": costs,
+        "costs": costs,
         "w": w,
         "b": b,
         "Y_prediction_train": Y_pridiction_train,
         "Y_prediction_test": Y_pridiction_test,
-        "learn_rate": learn_rate,
+        "learning_rate": learn_rate,
         "num_iterations": num_iteration
     }
-    return 0
+    return d
