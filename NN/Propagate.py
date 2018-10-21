@@ -23,7 +23,8 @@ def propagate(w, b, X, Y):
     z = np.dot(w.T, X) + b
     from Sigmoid import sigmoid
     A = sigmoid(z)
-    cost = -1 / m * np.sum(Y * np.log(A) + (1 - Y) * np.log(1 - A))
+
+    cost = (-1 / m) * np.sum(Y * np.log(A) + (1 - Y) * np.log(1 - A))
 
     dz = A - Y
     dw = 1 / m * np.dot(X, dz.T)

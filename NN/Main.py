@@ -82,7 +82,7 @@ print()
 # optimize
 from Optimize import optimize
 
-params, grads, costs = optimize(w, b, X, Y, num_iterations=101, learning_rate=0.009, print_cost=True)
+params, grads, costs = optimize(w, b, X, Y, num_iterations=101, learning_rate=0.005, print_cost=True)
 print("w = " + str(params["w"]))
 print("b = " + str(params["b"]))
 print("dw = " + str(grads["dw"]))
@@ -93,3 +93,10 @@ print("cost = " + str(costs))
 from Predict import predict
 
 print("prediction = " + str(predict(w, b, X)))
+print()
+
+# model
+from Model import model
+
+model(X_train=train_set_x, Y_train=train_set_y, X_test=test_set_x, Y_test=test_set_y,
+      num_iteration=2000, learn_rate=0.005, print_cost=True)
