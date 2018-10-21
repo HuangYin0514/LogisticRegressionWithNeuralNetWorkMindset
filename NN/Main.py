@@ -99,7 +99,7 @@ print()
 # model
 from Model import model
 
-d = model(X_train=train_set_x, Y_train=train_set_y, X_test=test_set_x, Y_test=test_set_y, num_iteration=2000,
+d = model(X_train=train_set_x, Y_train=train_set_y, X_test=test_set_x, Y_test=test_set_y, num_iteration=2,
           learn_rate=0.005, print_cost=True)
 print()
 
@@ -118,4 +118,27 @@ plt.plot(costs)
 plt.ylabel("cost")
 plt.xlabel("iterations (per handreds)")
 plt.title("Learning rate =" + str(d["learning_rate"]))
+# plt.show()
+print()
+
+# further analysis(optionanl/ungraded exersicse)
+# choice of learning rate
+
+learing_rate = [0.01, 0.001, 0.0001]
+models = {}
+plt.figure()
+for i in learing_rate:
+    print("learing rate is " + str(i))
+    models[str(i)] = model(X_train=train_set_x, Y_train=train_set_y, X_test=test_set_x, Y_test=test_set_y,
+                           num_iteration=1500,
+                           learn_rate=i, print_cost=False)
+    print("\n" + "--------------------------------------------------" + "\n")
+
+for i in learing_rate:
+    plt.plot(models[str(i)]["costs"], label=models[str(i)]["learning_rate"])
+plt.xlabel("iterations")
+plt.ylabel("cost")
+legend = plt.legend(loc="upper center", shadow=True)
+frame = legend.get_frame()
+frame.set_facecolor("0.90")
 plt.show()
